@@ -1,0 +1,7 @@
+type: library
+language: typescript
+
+project: 
+  description: 'Utility functions'
+
+tags: ['vite','vitest']

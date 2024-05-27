@@ -1,0 +1,8 @@
+type: 'library'
+language: 'typescript'
+
+project:
+  name: '@nocht/core'
+  description: 'The core component of the nocht library'
+
+tags: ['vite','vitest']

@@ -1,0 +1,7 @@
+type: library
+language: typescript
+
+project: 
+  description: 'Code for making nocht plugins'
+
+tags: ['vite','vitest']
