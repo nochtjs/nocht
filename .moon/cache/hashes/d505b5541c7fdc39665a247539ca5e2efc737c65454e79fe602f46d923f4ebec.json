@@ -1,1 +1,0 @@
-[{"aliases":{},"dependencies":{"@nocht/shared":"workspace:../shared","dom":"^0.0.3","jsdom":"^24.1.0","shared":"^0.2.0","typescript":"^5.2.2","vite":"^5.2.0","vite-plugin-dts":"^3.9.1","vite-plugin-lib-types":"^3.0.9","vitest":"^1.4.0"},"name":"core"}]
