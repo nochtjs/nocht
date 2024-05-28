@@ -8,9 +8,12 @@ importers:
 
   .:
     devDependencies:
-      '@nocht/core':
-        specifier: workspace:../core
-        version: link:../core
+      '@nocht/shared':
+        specifier: workspace:../shared
+        version: link:../shared
+      nocht:
+        specifier: workspace:../nocht
+        version: link:../nocht
       typescript:
         specifier: ^5.2.2
         version: 5.4.5
