@@ -34,3 +34,5 @@ if (import.meta.vitest) {
 }
 
 */
+
+export function createPlugin() {};
