@@ -6,7 +6,6 @@ A modern jQuery-like library that is fully tree-shakable so you only pull in wha
 
 ## Installation
 
-
 ```zsh
   npm install nocht -D
   npm install @nocht/dom -D
@@ -31,6 +30,31 @@ For example, `$.ajax` is a fully-featured XHR wrapper that saved thousands of ho
 
 `jQuery.Deferred` can be replaced with `Promise` and `async`/`await`.
 
+#### Why is it missing this method from jQuery?
+
+Not every feature of jQuery will be added, and not every feature will be added in exactly the same way as you might imagine.
+
+For example, `.map` in jQuery land returns a jQuery object. In Nocht land, since we extend the Array primitive, you are always working with an array with some Nocht sugar sprinkled on top. Meaning this:
+
+```js
+$('[type="checkbox"]')
+    .map(function() {
+        return this.id;
+    })
+    .get()
+    .join()
+```
+
+would become this:
+
+```js
+$('[type="checkbox"]')
+    .map(function() {
+        return this.id
+    })
+    .join();
+```
+
 #### What is `@nocht/plugin` for?
 
 `jQuery.fn` is a simple way to add a plugin to the jQuery object. Want to add your own way of handling arrays?
@@ -42,11 +66,12 @@ jQuery.fn.myArrayHandler = function() { ... }
 Nocht originally planned to add it's own way of adding plugins that worked much the same as `jQuery.fn` but using a method in the `Nocht` class.
 
 ```js
-const $ = nocht(document);
+const $ = nocht(document);gi
 $.use('myArrayHandler', function() { ... });
 ```
 
 But this is on hold.
+
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
@@ -62,4 +87,5 @@ But this is on hold.
     - [ ] `@nocht/css`
     - [ ] `@nocht/data`
     - [ ] `@nocht/form`
+    - [ ] `@nocht/reactive` - An `@vue/reactivity` like library
 
