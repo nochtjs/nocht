@@ -8,18 +8,18 @@ hero:
   tagline: A jQuery-like library to make web development less of a pain
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
+      text: Getting Started
+      link: /getting-started
     - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: Packages
+      link: /packages/
 
 features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+  - title: jQuery-like
+    details: Smell that? That's the smell of the old days
+  - title: Type Safe
+    details: Built with TypeScript through and through
+  - title: Modular
+    details: Only import what you need
 ---
 
