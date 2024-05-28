@@ -1,9 +1,9 @@
 import { ready, tick } from './scheduler';
-import type { N } from './index.d';
+import type { N } from './types';
 import { isArray, isFunction, isString } from '@nocht/shared';
-import { on, one, off } from './events';
+import { on, off, trigger } from './events';
 
-const nochtSymbol = Symbol.for('@@nocht@@');
+
 export class Nocht<T extends Document|Element> extends Array<T> implements N.Nocht {
     /**
      * Say you have a page with 4 div elements:
@@ -14,22 +14,24 @@ export class Nocht<T extends Document|Element> extends Array<T> implements N.Noc
      * 
      * ```ts
      * const $ = nocht({
+     *  name: 'Jill',
      *  test() { return true }
      * });
      * 
+     * $.name // 'Jill'
      * $.test() // should return true as the test function passed in was add to this nocht instance
      * ```
      */
     [index: string|symbol]: any;
-    [nochtSymbol] = true;
+    __nocht__:true = true;
     ctx: N.Context;
     ready(fn: () => void) {
         ready.call(this, fn);
         return this;
     }
 
-    getCtx<T = Exclude<N.Context, N.Nocht>>(): T {
-        return (this.ctx as N.Nocht<T>)[nochtSymbol] ? (this.ctx as Nocht).getCtx() : (this.ctx as T);
+    getCtx() {
+        return (this.ctx as N.Nocht).__nocht__ === true ? (this.ctx as N.Nocht).getCtx() : (this.ctx as HTMLElement|Document);
     }
 
     tick(fn: () => void) {
@@ -37,19 +39,22 @@ export class Nocht<T extends Document|Element> extends Array<T> implements N.Noc
         return this;
     }
 
-    on(events: string, callback: EventListenerOrEventListenerObject, options?: AddEventListenerOptions) {
+    on(events: string | Record<string, EventListener>, callback?: EventListenerOrEventListenerObject, options: AddEventListenerOptions = {}): N.Nocht {
         return on.call(this, events, callback, options);
     }
 
-    off(events: string, callback: EventListenerOrEventListenerObject, options?: AddEventListenerOptions) {
+    off(events: string | Record<string, EventListener>, callback?: EventListenerOrEventListenerObject, options: AddEventListenerOptions = {}): N.Nocht {
         return off.call(this, events, callback, options);
     }
 
-    one(events: string, callback: EventListenerOrEventListenerObject, options: AddEventListenerOptions = {}) {
+    one(events: string | Record<string, EventListener>, callback?: EventListenerOrEventListenerObject, options: AddEventListenerOptions = {}): N.Nocht {
         options.once = true;
         return on.call(this, events, callback, options);
     }
 
+    trigger(eventName: string, detail?: Record<string, any>): N.Nocht {
+        return trigger.call(this, eventName, detail);
+    }
 
     constructor(items: T[] = [], ctx: N.Context) {
         super(...items);
@@ -61,7 +66,7 @@ export class Nocht<T extends Document|Element> extends Array<T> implements N.Noc
         return this.ctx.querySelectorAll(selector);
     }
 
-    get length() {
+    get length(): number {
         return this.items?.size ?? 0;
     }
 }
@@ -79,26 +84,26 @@ export function nocht(selectorOrInitializer?: SelectorOrInitializer, ctx: N.Cont
         // don't pass anything
         case !selectorOrInitializer:
             break;
-        case isString(selectorOrInitializer):
-            const els = ctx.querySelectorAll(selectorOrInitializer);
+        case isString(selectorOrInitializer!):
+            const els = ctx.querySelectorAll(selectorOrInitializer as string);
             if (els !== null)
                 items.push(...Array.from(els));
             break;
         // pass a ready function
-        case isFunction(selectorOrInitializer):
+        case isFunction(selectorOrInitializer!):
             const $ = new Nocht(items, ctx);
-            return $.ready(selectorOrInitializer);
+            return $.ready(selectorOrInitializer as Initializer);
         // pass the document
-        case Object.is(selectorOrInitializer, document):
+        case Object.is(selectorOrInitializer!, document):
             items.push(document);
             break;
         // Pass an element
-        case 'nodeType' in (selectorOrInitializer as Element):
-            items.push(selectorOrInitializer as Element);
+        case 'nodeType' in (selectorOrInitializer! as Element):
+            items.push(selectorOrInitializer! as Element);
             break;
         // case is html string
-        case isArray(selectorOrInitializer) && selectorOrInitializer.every(el => el instanceof HTMLElement):
-            items.push(...selectorOrInitializer);
+        case isArray(selectorOrInitializer!) && selectorOrInitializer!.every(el => el instanceof HTMLElement):
+            items.push(...(selectorOrInitializer as Element[]));
             break;
 
     }

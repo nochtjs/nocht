@@ -1,4 +1,4 @@
-import { N } from './index.d';
+import type { N } from './types';
 
 let queued = false;
 const queue = new Map<Function, Function>();
