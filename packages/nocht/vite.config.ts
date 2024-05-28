@@ -16,7 +16,5 @@ export default defineConfig({
       formats: ['es']
     }
   },
-  plugins: [dts({
-    exclude: ['src/types.d.ts']
-  })]
+  plugins: [dts({ rollupTypes: true })]
 })

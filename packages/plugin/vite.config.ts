@@ -19,7 +19,5 @@ export default defineConfig({
   define: {
     'import.meta.vitest': 'undefined',
   },
-  plugins: [dts({
-    exclude: ['src/types.d.ts']
-  })]
+  plugins: [dts({ rollupTypes: true })]
 })
