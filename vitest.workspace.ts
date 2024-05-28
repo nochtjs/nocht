@@ -4,9 +4,8 @@ export default defineWorkspace([
     'packages/*',
     {
         test: {
-            include: ['__tests__/**/*.test.{ts,js}'],
-            name: 'jsdom',
-            environment: 'jsdom'
+            environment: 'jsdom',
+            include: ['**/*.{test,spec}.ts'],
         }
     }
 ])

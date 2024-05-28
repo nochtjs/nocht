@@ -4,13 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest"
+    "build": "pnpm run -r build",
+    "cli-test": "vitest",
+    "test":"vitest --ui",
+    "cov": "vitest run --coverage"
   },
   "devDependencies": {
-    "@moonrepo/cli": "^1.24.6",
     "@nocht/core": "workspace:./packages/core",
     "@nocht/dom": "workspace:./packages/dom",
     "@nocht/shared": "workspace:./packages/shared",
+    "@vitest/coverage-v8": "^1.6.0",
+    "@vitest/ui": "^1.6.0",
     "jsdom": "^24.1.0",
     "vite": "^5.2.11",
     "vitest": "^1.6.0"

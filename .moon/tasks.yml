@@ -1,9 +1,0 @@
-tasks:
-  build:
-    command: 'vite build'
-    inputs:
-      - 'src/**/*'
-    outputs:
-      - 'dist'
-  test:
-    command: 'vitest'

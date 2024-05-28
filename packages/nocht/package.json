@@ -1,9 +1,10 @@
 {
-  "name": "plugin",
+  "name": "core",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
   "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -12,13 +13,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "MIT",
+  "license": "ISC",
   "devDependencies": {
-    "@nocht/core": "workspace:../core",
-    "@nocht/shared": "workspace:../shared",
-    "@types/node": "^20.12.12",
     "jsdom": "^24.1.0",
-    "typescript": "^5.4.5",
+    "typescript": "^5.2.2",
     "vite": "^5.2.11",
     "vite-plugin-dts": "^3.9.1"
   }
