@@ -15,7 +15,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       {
         text: 'Packages',
-        items: pkgs.map(pkg => ({ text: `@nocht/${pkg.toLowerCase()}`, link: `/packages/${pkg.toLowerCase()}` }))
+        items: [{ text: 'Overview', link: '/packages/' }, ...pkgs.map(pkg => ({ text: `@nocht/${pkg.toLowerCase()}`, link: `/packages/${pkg.toLowerCase()}` }))]
       }
     ],
 
