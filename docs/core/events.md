@@ -59,3 +59,14 @@ function one(this: Nocht, events: string, callback: EventListenerOrEventListener
 $.one('click', console.log);
 ```
 
+## `.trigger`
+
+Trigger events on all the elements in a Nocht instance.
+
+```ts
+function trigger(this: Nocht, eventName: string, detail?: Record<string, any>): Nocht;
+```
+
+## Differences between jQuery and Nocht
+
+Need further testing.
