@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  base: 'nocht',
   title: "Nocht",
   description: "A jQuery-like library to make web development less of a pain",
   themeConfig: {
