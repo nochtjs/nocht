@@ -12,7 +12,8 @@
     "test": "vitest"
   },
   "devDependencies": {
-    "@nocht/core": "workspace:../core",
+    "@nocht/shared": "workspace:../shared",
+    "nocht": "workspace:../nocht",
     "typescript": "^5.2.2",
     "vite": "^5.2.0",
     "vite-plugin-dts": "^3.9.1"
