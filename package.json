@@ -6,17 +6,21 @@
   "scripts": {
     "build": "pnpm run -r build",
     "cli-test": "vitest",
-    "test":"vitest --ui",
-    "cov": "vitest run --coverage"
+    "test": "vitest --ui",
+    "cov": "vitest run --coverage",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
-    "@nocht/core": "workspace:./packages/core",
+    "nocht": "workspace:./packages/nocht",
     "@nocht/dom": "workspace:./packages/dom",
     "@nocht/shared": "workspace:./packages/shared",
     "@vitest/coverage-v8": "^1.6.0",
     "@vitest/ui": "^1.6.0",
     "jsdom": "^24.1.0",
     "vite": "^5.2.11",
+    "vitepress": "^1.2.2",
     "vitest": "^1.6.0"
   },
   "keywords": [],

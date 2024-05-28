@@ -86,6 +86,6 @@ But this is on hold.
     - [ ] `@nocht/fetch`
     - [ ] `@nocht/css`
     - [ ] `@nocht/data`
-    - [ ] `@nocht/form`
     - [ ] `@nocht/reactive` - An `@vue/reactivity` like library
+    - [ ] `@nocht/fx` - An animation library similar to `.animate` but taking advantage of the WAAPI
 
