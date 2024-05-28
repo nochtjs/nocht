@@ -1,5 +1,9 @@
 import { defineConfig } from 'vitepress'
 
+const pkgs = ['DOM','Fx','Reactive','Data','Fetch','CSS'];
+
+
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: '/nocht/',
@@ -9,7 +13,10 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      {
+        text: 'Packages',
+        items: pkgs.map(pkg => ({ text: `@nocht/${pkg.toLowerCase()}`, link: `/packages/${pkg.toLowerCase()}` }))
+      }
     ],
 
     sidebar: [
@@ -18,24 +25,18 @@ export default defineConfig({
         items: [
           { text: 'Installation', link: '/installation' },
           { text: 'Getting Started', link: '/getting-started' },
-          { text: 'Caveats', link: 'caveats' },
-          { text: 'Differences from jQuery', link: 'differences' }
+          { text: 'Differences from jQuery', link: '/differences' },
+          { text: 'A note about .ready', link: '/a-note-about-ready' }
         ]
       },
       {
-        text: 'Examples',
-        items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
-        ]
+        text: 'Core',
+        items: ['Events','Scheduler','Bind'].map(feat => ({ text: feat, link: `/core/${feat.toLowerCase()}` }))
       },
       {
         text: 'Packages',
-        items: [
-          { text: '@nocht/dom', link: '/dom-examples' },
-          { text: '@nocht/plugin', link: '/plugin-examples' },
-          { text: '@nocht/shared', link: '/shared-examples' }
-        ]
+        items: pkgs.map(pkg => ({ text: pkg, link: `/packages/${pkg.toLowerCase()}` }))
+
       }
     ],
 

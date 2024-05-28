@@ -25,5 +25,4 @@ function flush(this:N.Nocht) {
 
     queue.clear();
     queued = false;
-    console.log(queue.size);
 }

@@ -1,0 +1,3 @@
+# `@nocht/data`
+
+## Coming Soon
