@@ -21,3 +21,13 @@ When you run `$()`, it creates a `jQuery` object that has all the goodies inside
 ## Chaining
 
 Chaining should remain mostly the same, and we've added plenty of testing to make sure that each method that *should* chain does. If you found a method that doesn't chain, or doesn't chain in the expected way, please let us know [by filing an issue](https://github.com/nochtjs/nocht/issue).
+
+## Dollar sign conventions
+
+The nocht package exports two modules, `$` and `nocht`. Calling `$(document)` is the same as calling `nocht(document)`, similar to how `$(document)` and `jQuery(document)` are the same.
+
+If you are worried about potentially conflicting with jQuery, you can always rename it while importing:
+
+```js
+import { $ as $$ } from 'nocht';
+```
