@@ -35,8 +35,7 @@ describe('@nocht/core/events', () => {
     it('should handle multiple events', () => {
         const clickFn = vi.fn();
         const customFn = vi.fn();
-        n.on('click custom:event', (e) => {
-            console.log(e.type);
+        n.on('custom:event click', (e) => {
             if (e.type === 'click') {
                 clickFn();
             } else {
@@ -46,8 +45,51 @@ describe('@nocht/core/events', () => {
 
         document.body.click();
         expect(clickFn).toHaveBeenCalledOnce();
-        expect(customFn).not.toHaveBeenCalledOnce()
-        document.body.dispatchEvent(new CustomEvent('custom:event'));
+        expect(customFn).not.toHaveBeenCalled()
+        document.dispatchEvent(new CustomEvent('custom:event'));
         expect(customFn).toHaveBeenCalledOnce();
+    });
+
+    it('should accept an object of events', () => {
+        const click = vi.fn();
+        const keydown = vi.fn();
+        const custom = vi.fn();
+
+        const events = {
+            click,
+            keydown,
+            custom
+        };
+
+        n.on(events);
+
+        document.body.click();
+        document.dispatchEvent(new Event('keydown'));
+        document.dispatchEvent(new CustomEvent('custom'));
+
+        expect(click).toHaveBeenCalledOnce();
+        expect(keydown).toHaveBeenCalledOnce();
+        expect(custom).toHaveBeenCalledOnce();
+    });
+
+    it('should trigger events', () => {
+        const fn = vi.fn();
+        n.on('click', fn);
+
+        n.trigger('click');
+        expect(fn).toHaveBeenCalledOnce();
+    })
+
+    it('should make this inside of the handler equal to the event target', () => {
+        document.body.innerHTML += '<div></div><div></div><div></div>';
+        const $ = nocht('div');
+
+        const targetedDiv = document.body.children[1];
+        $.on('click', function() {
+            expect(this).toStrictEqual(targetedDiv);
+        });
+
+        // @ts-ignore
+        targetedDiv.click();
     })
 })
