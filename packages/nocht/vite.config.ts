@@ -2,6 +2,7 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
+import oxlint from 'vite-plugin-oxlint';
 
 export default defineConfig({
   build: {
@@ -16,5 +17,5 @@ export default defineConfig({
       formats: ['es']
     }
   },
-  plugins: [dts({ rollupTypes: true })]
+  plugins: [dts({ rollupTypes: true }), oxlint({ dir: 'src' })]
 })
