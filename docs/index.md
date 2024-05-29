@@ -15,11 +15,14 @@ hero:
       link: /packages/
 
 features:
-  - title: jQuery-like
-    details: Smell that? That's the smell of the old days
-  - title: Type Safe
-    details: Built with TypeScript through and through
-  - title: Modular
-    details: Only import what you need
+  - icon: 🧑‍💻 
+    title: jQuery-like
+    details: Smell that? That's the smell of the old days. I thought they would smell better...
+  - icon: 🛟
+    title: Type Safe
+    details: Built with TypeScript through and through. Always know what is being sent your way.
+  - icon: 🌳 
+    title: Modular
+    details: Only import what you need, Nocht aims to be as tree-shakeable as possible
 ---
 

@@ -10,9 +10,9 @@ function on( elem, types, selector, data, fn, one ) {
 
 These arguments are then parsed down as the function goes on. Is `types` an object? Then check if there is `data`, if not make `data` equal `selector` and make `selector` `undefined`. Is there no `data` and no `fn`? Then the `selector` must be the `fn` and `data` and `selector` should be made `undefined`. And so on, and so on.
 
-Infrequent users of jQuery wil be surprised at all the options. What we *know* about the `.on` function is that it accepts a space separated string or object of event names and applies them to the elements inside the jQuery object. Frequent jQuery users might not know that there is no `hover` event in vanilla javascript and that it is an alias for passing `"mouseenter mouseleave
+Infrequent users of jQuery wil be surprised at all the options. What we *know* about the `.on` function is that it accepts a space separated string or object of event names and applies them to the elements inside the jQuery object. Frequent jQuery users might not know that there is no `hover` event in vanilla javascript and that it is an alias for passing `"mouseenter mouseleave`.
 
-In Nocht, the goal is to capture the usefulness of these functions and support as much of the same functionality as is within reason. For example, the `data` argument can be handled by the `CustomEvent.detail` object. `Nocht.on` supports the space separated string and object of event names syntax, but 
+In Nocht, the goal is to capture the usefulness of these functions and support as much of the same functionality as is within reason. For example, the `data` argument can be handled by the `CustomEvent.detail` object.
 
 ## The Nocht class
 
@@ -20,7 +20,7 @@ When you run `$()`, it creates a `jQuery` object that has all the goodies inside
 
 ## Chaining
 
-Chaining should remain mostly the same, and we've added plenty of testing to make sure that each method that *should* chain does. If you found a method that doesn't chain, or doesn't chain in the expected way, please let us know [by filing an issue](https://github.com/nochtjs/nocht/issue).
+Chaining should remain mostly the same, and we've added plenty of testing to make sure that each method that *should* chain does. If you found a method that doesn't chain, or doesn't chain properly, please let us know [by filing an issue](https://github.com/nochtjs/nocht/issues).
 
 ## Dollar sign conventions
 

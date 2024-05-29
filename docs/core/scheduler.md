@@ -18,7 +18,7 @@ $.ready(() => {
 
 ## `.tick`
 
-The `.tick` function calls a function on the next possible moment. Essentially, on the next pass of the event loop. You can think of it similar to deferring the function by just a "tick". Similar to how `.nextTick` works in Vue.
+The `.tick` function calls a function on the next possible moment. This can lead to some unexpected outcomes. Be sure to check out the 
 
 For example say you're setting the color of something inside of a `requestAnimationFrame`. The result of that won't be ready on the very next line.
 
@@ -31,23 +31,28 @@ console.log($[0].style.color); // This is likely still going to log 'black';
 $.tick(() => console.log($[0].style.color)) // This is likely going to log 'red';
 ```
 
-## Which should I use?
+## FAQ
+
+The scheduler functionality of Nocht might be confusing at first. Hopefully this FAQ answers some of those confused questions. If not, ask in our [GitHub Discussions and we can talk more about it](https://github.com/nochtjs/nocht/discussions).
+
+### Which should I use?
 
 The telling factor of which you should use comes down to priority.
+
 
 - My function needs to run as soon as possible:
     - Does it depend on the result of something happening inside a `.tick` or `.ready`?
         - Then use the same `.tick` or `.ready` that the result is being calculated in.
     - Is it really that important?
         - Then run the function as is, don't worry about scheduling.
-    - Is it something that can be deferred?
+    - Is the function important enough to be added to the queue?
         - Then use `.ready`
-    - Is it not important enough to run immediately, but should be done at the next possible moment?
+    - Is it okay to run the function after everything in the queue has completed?
         - Then use `.tick`
 - I already know everything I could possibly need to know about the event loop, `requestAnimationFrame`, `requestIdleCallback`, `queueMicroTask`, promises, execution stack, `setTimeout`, `setInterval`, and the order that everything runs in:
     - Then use whichever feels best to you.
 
-## Why is this not the value I was expecting?
+### Why is this not the value I was expecting?
 
 Take the code below for example:
 
@@ -74,7 +79,7 @@ $.ready(() => {
 
 The variable `i` has been scoped inside of the `.ready`, leaving no room for mistakes.
 
-### I'm using `.tick` and `.ready` but things are still out of order.
+#### I'm using `.tick` and `.ready` but things are still out of order.
 
 Remember `.ready` and `.tick` both schedule functions, but only `.ready` queues functions.
 
@@ -88,4 +93,10 @@ ready(addText('ready 2'));
 
 If `.tick` and `.ready` did nothing other than run the functions immediately, then the text would be `tick 1 ready 1 tick 2 ready 2`
 
-The text of your body will likely be `tick 1 ready 1 ready 2 tick 2`. [Check out this CodePen to see it in action.](https://codepen.io/gingerchew/pen/pomNQmq/1dc435f0edc97a9a2113a7607a472d3b?editors=0010)
+The text of your body will likely be `tick 1 ready 1 ready 2 tick 2`. [Check out this CodePen to see it in action](https://codepen.io/gingerchew/pen/pomNQmq/1dc435f0edc97a9a2113a7607a472d3b?editors=0010). Why does this happen?
+
+There's two reasons for this:
+
+- 1. `.tick` and `.ready` are schedulers, that means they happen just after the JavaScript has run for a given context.
+- 2. Once a `.ready` queue has started, `.tick` will not run until the queue is empty.
+

@@ -4,7 +4,7 @@ Nocht is an ECMAScript Module package. This means it should *always* be added wi
 
 ## How does Nocht work with this? 
 
-Under the hood of Nocht has a simple scheduler. It is based on the scheduler that powers [petite-vue](https://github.com/vuejs/petite-vue/blob/main/src/scheduler.ts) with some changes made to support proper chaining. Nocht exposes the scheduler in two methods: `.tick` and `.ready`.
+Nocht instead has a simple scheduler. It is based on the scheduler that powers [petite-vue](https://github.com/vuejs/petite-vue/blob/main/src/scheduler.ts) with some changes made to support chaining. Nocht exposes the scheduler in two methods: `.tick` and `.ready`.
 
 ## `.tick` vs. `.ready`
 
@@ -14,7 +14,7 @@ Most of the time, they will be the same thing. In fact, `.tick` is used inside o
 
 Here's how you can think of it:
 
-- Can my function run at any point in the immediate future?
+- Can my function run at any point in the immediate future, and it's fine if it is added to a queue of other functions?
     - [Use `.ready`](/core/scheduler#ready)
 - Does my function need to run at the next possible moment?
     - [Use `.tick`](/core/scheduler#tick)
@@ -22,3 +22,7 @@ Here's how you can think of it:
     - [Use the same function the the dependency is using](/core/scheduler#why-is-this-undefined)
 - Does it not matter when my function runs? Do I understand enough about `requestAnimationFrame` and the event loop to do it myself?
     - Don't worry about using either.
+
+## Caveats
+
+There are some caveats to the bulleted explanation. You can get a deeper understanding of them by [checking out this brief explainer on when `.tick` and `.ready` run](/core/scheduler/#i-m-using-tick-and-ready-but-things-are-still-out-of-order).
