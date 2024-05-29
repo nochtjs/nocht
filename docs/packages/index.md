@@ -1,4 +1,4 @@
 # Packages
 
-- [`@nocht/dom`](/packages/dom)
-- [`@nocht/data`](/packages/data)
+- [`@nocht/dom`](/dom)
+- [`@nocht/data`](/data)
